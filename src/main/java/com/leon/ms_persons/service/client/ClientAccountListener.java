@@ -1,19 +1,21 @@
 package com.leon.ms_persons.service.client;
 
-import com.leon.ms_persons.domain.dto.request.AccountMovementEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CountDownLatch;
 
 
-@Service
+@Component
 public class ClientAccountListener {
-    @Bean
-    public Consumer<AccountMovementEvent> inputChannel() {
-        return event -> {
-            // Handle the event (e.g., update account balance)
-            System.out.println("Received event: " + event.getAccountId() + " with new balance: " + event.getNewBalance());
-        };
+
+    private final CountDownLatch latch = new CountDownLatch(1);
+
+    public void receiveMessage(String message) {
+        System.out.println("Received <" + message + ">");
+        latch.countDown();
+    }
+
+    public CountDownLatch getLatch() {
+        return latch;
     }
 }

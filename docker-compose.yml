@@ -1,0 +1,6 @@
+version: "3.2"
+services:
+  persona-cliente-service:
+    image: persona-cliente-service:latest
+    ports:
+      - "8081:8081"
