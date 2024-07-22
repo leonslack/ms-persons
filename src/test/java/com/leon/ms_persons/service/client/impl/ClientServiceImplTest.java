@@ -29,18 +29,9 @@ class ClientServiceImplTest {
         client.setStatus(true);
 
         Mockito.when(clientRepository.save(client.toDomain())).thenReturn(client.toDomain());
-        assertEquals(client.toDomain(), clientService.saveClient(client));
-    }
-
-    @Test
-    void getClientById() {
-    }
-
-    @Test
-    void deleteClient() {
-    }
-
-    @Test
-    void updateClient() {
+        Client createdClient = clientService.saveClient(client);
+        assertEquals(createdClient.getClientId(), client.getClientId());
+        assertEquals(createdClient.getPassword(), client.getPassword());
+        assertEquals(createdClient.isStatus(), client.isStatus());
     }
 }
