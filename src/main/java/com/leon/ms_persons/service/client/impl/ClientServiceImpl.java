@@ -42,7 +42,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client updateClient(Long id, Client updatedClient) {
         Optional<Client> existingClientOptional = getClientById(id);
-        if(!existingClientOptional.isPresent()) {
+        if(existingClientOptional.isEmpty()) {
             throw new EntityNotFoundException("Client not found with id " + updatedClient.getId());
         }
 

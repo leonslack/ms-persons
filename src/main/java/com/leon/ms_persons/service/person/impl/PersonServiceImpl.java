@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person updatePerson(Long id, Person updatedPerson) {
         Optional<Person> existingPersonOptional = getPersonById(id);
-        if(!existingPersonOptional.isPresent()) {
+        if(existingPersonOptional.isEmpty()) {
             throw new EntityNotFoundException("Person not found with id " + updatedPerson.getId());
         }
 
